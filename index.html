@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="支持 1–4 个集合的大数据高性能韦恩图工具。" />
+  <title>VennFlow · 韦恩图工具</title>
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <header class="side-header">
+        <a class="brand" href="#" aria-label="VennFlow 首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>VennFlow</span></a>
+        <span class="version">2.0</span>
+      </header>
+      <section class="instructions">
+        <ol>
+          <li>最多粘贴四组列表，每行一个元素。</li>
+          <li>点击图中的数字查看对应结果。</li>
+          <li>右键图形可查看并保存图片。</li>
+          <li>点击导入示例数据：<a href="#" id="loadExample">示例数据</a></li>
+        </ol>
+      </section>
+      <div class="case-tools"><button id="upperCase">转为大写</button><button id="lowerCase">转为小写</button><span>转换后不可撤销</span></div>
+      <section class="list-grid" id="listGrid" aria-label="四个集合输入框"></section>
+      <section class="results">
+        <div class="results-label"><span>结果：</span><button id="downloadRegion" disabled>下载 TXT</button></div>
+        <div class="result-box" id="resultBox" aria-live="polite"><div class="result-list" id="resultList"></div><button id="loadMore" hidden>继续加载</button></div>
+      </section>
+    </aside>
+    <section class="figure-panel" aria-label="韦恩图画布">
+      <div class="toolbar">
+        <label>样式：<select id="styleMode"><option value="white" selected>纯白</option><option value="color">彩色</option><option value="intensity">按占比</option><option value="transparent">透明</option></select></label>
+        <label class="check"><input type="checkbox" id="showPercent" checked /> 显示占比</label><span class="separator"></span>
+        <label>线宽：<button class="step" data-for="lineWidth" data-step="-1">−</button><input id="lineWidth" type="number" min="1" max="8" value="2" /><button class="step" data-for="lineWidth" data-step="1">＋</button></label>
+        <label>字号：<button class="step" data-for="fontSize" data-step="-1">−</button><input id="fontSize" type="number" min="12" max="36" value="28" /><button class="step" data-for="fontSize" data-step="1">＋</button></label>
+        <label>字体：<select id="fontFamily"><option value="Arial, sans-serif" selected>Arial</option><option value="-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif">系统字体</option><option value="ui-monospace, SFMono-Regular, Consolas, monospace">等宽</option></select></label>
+        <span class="toolbar-space"></span><button class="export" id="exportPng">导出 PNG</button><button class="export secondary" id="exportSvg">SVG</button><button class="export secondary" id="exportCsv">CSV</button>
+      </div>
+      <div class="figure-wrap" id="figureWrap">
+        <svg id="vennSvg" viewBox="0 0 1000 1000" role="img" aria-labelledby="diagramTitle diagramDesc"><title id="diagramTitle">韦恩图</title><desc id="diagramDesc">点击区域数字查看该区域的元素</desc><rect width="1000" height="1000" fill="#ffffff" /><g id="shadeLayer"></g><g id="shapeLayer"></g><g id="labelLayer"></g></svg>
+      </div>
+    </section>
+  </main>
+  <div class="context-menu" id="contextMenu" hidden><button data-export="png">保存为 PNG</button><button data-export="svg">保存为 SVG</button></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=4"></script>
+</body>
+</html>
